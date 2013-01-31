@@ -104,8 +104,6 @@ function evalPostfix(postfix) {
 			var left = numberStack.pop();
 			numberStack.push(operateOn(token, left, right));
 		}
-
-		console.log(numberStack);
 	});
 
 	return numberStack.pop();
@@ -116,11 +114,15 @@ function evalExpression(expression) {
 	return evalPostfix(postfix);
 }
 
+function rollExpression(expression) {
+	return evalExpression(expression);
+}
+
 //roll a die
 function roll(string) {
 	var xdy = string.split("d");
 	var x = parseInt(xdy[0]);
 	var y = parseInt(xdy[1]);
 	if(x <= 0 || y <= 0) return 0;
-	return Math.round(Math.random()*x*(y-1))+y;
+	return Math.round(Math.random()*((x*y)-x))+x;
 }
